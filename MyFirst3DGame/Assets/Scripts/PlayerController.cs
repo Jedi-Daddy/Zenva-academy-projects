@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rig;
     public float moveSpeed;
+    public float jumpForce;
 
     // Update is called once per frame
     void Update()
@@ -14,5 +15,10 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical") * moveSpeed;
 
         rig.velocity = new Vector3(x, rig.velocity.y, z);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 }
