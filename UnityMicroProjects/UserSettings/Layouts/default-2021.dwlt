@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 71
+  controlID: 53
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 16
+  controlID: 129
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: "C:\\Users\\avzhu\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\Zenva\\UnityMicroProjects"
+  m_LastProjectPath: "C:\\Users\\avzhu\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\Zenva-academy-projects\\UnityMicroProjects"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -847,7 +847,7 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.02556261, y: -0.9029552, z: -0.054242417, w: 0.4255329}
     speed: 2
-    m_Value: {x: -0.025481194, y: -0.90359163, z: -0.05428065, w: 0.4241776}
+    m_Value: {x: 0.025562583, y: 0.90295434, z: 0.054242365, w: -0.4255325}
   m_Size:
     m_Target: 20.169353
     speed: 2
