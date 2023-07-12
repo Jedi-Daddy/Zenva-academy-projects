@@ -347,7 +347,9 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/Coin.cs"
+"Assets/Scripts/EndFlag.cs"
 "Assets/Scripts/Enemy.cs"
+"Assets/Scripts/Menu.cs"
 "Assets/Scripts/PlayerController.cs"
 -langversion:9.0
 
