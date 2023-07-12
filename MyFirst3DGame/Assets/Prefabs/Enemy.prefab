@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc5319ceeb8c38469ef1061eccd2fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 3
   moveOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &378354577517895846
 PrefabInstance:
