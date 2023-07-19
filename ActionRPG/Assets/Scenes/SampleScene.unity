@@ -302,7 +302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 96ef62f9349d67d449a966a4dfa7bf84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -484,7 +484,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ea19fc41b828e404cbef8b5b2a64014c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
   minXlook: -60
   maxXlook: 60
   camAnchor: {fileID: 381685237}
-  invertXrotation: 1
+  invertXrotation: 0
 --- !u!114 &1926137742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ace10075967e6548a0ed6b2398e9504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpForce: 5
+  rig: {fileID: 1926137743}
 --- !u!54 &1926137743
 Rigidbody:
   m_ObjectHideFlags: 0
