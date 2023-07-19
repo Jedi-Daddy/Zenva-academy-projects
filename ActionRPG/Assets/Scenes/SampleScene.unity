@@ -275,7 +275,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753151692}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c804be0f30cd9ae4f84a8fcdabb2ff66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -372,7 +372,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811650711}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c804be0f30cd9ae4f84a8fcdabb2ff66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -567,7 +567,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913414494}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c804be0f30cd9ae4f84a8fcdabb2ff66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -664,7 +664,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926559720}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c804be0f30cd9ae4f84a8fcdabb2ff66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -977,7 +977,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926137740}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c804be0f30cd9ae4f84a8fcdabb2ff66, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4
@@ -1011,6 +1011,26 @@ PrefabInstance:
     - target: {fileID: 59494123770580436, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240585466770989367, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 2303588227413813745}
+    - target: {fileID: 1240585466770989367, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240585466770989367, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1240585466770989367, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1926137742}
+    - target: {fileID: 1240585466770989367, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+      propertyPath: attacDistance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1740282851889429224, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
       propertyPath: m_RootOrder
@@ -1058,3 +1078,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+--- !u!195 &2303588227413813745 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2735812845366869721, guid: e923567dd33d5424cbd04d73cccab8a1, type: 3}
+  m_PrefabInstance: {fileID: 2303588227413813744}
+  m_PrefabAsset: {fileID: 0}
