@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
         foreach(RaycastHit hit in hits)
         {
-            hit.collider.GetComponent<Enemy>().TakeDamage(damage);
+            hit.collider.GetComponent<Enemy>()?.TakeDamage(damage);
         }
     }
 
