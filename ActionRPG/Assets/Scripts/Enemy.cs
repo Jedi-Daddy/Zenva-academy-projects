@@ -23,12 +23,36 @@ public class Enemy : MonoBehaviour
         if(Vector3.Distance(transform.position, player.transform.position) <= attacDistance)
         {
             agent.isStopped = true;
-            // attack code
+            if(!isAttacking)
+            {
+                Attack();
+            }
         }
         else
         {
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
         }
+    }
+
+    void Attack()
+    {
+        isAttacking = true;
+
+        Invoke("TryDamage", 1.3f);
+        Invoke("DisableIsAttacking", 2.66f);
+    }
+
+    void TryDamage()
+    {
+        if(Vector3.Distance(transform.position, player.transform.position) <= attacDistance )
+        {
+            player.TakeDamage(damage);
+        }
+    }
+
+    void DisableIsAttacking()
+    {
+        isAttacking = false;
     }
 }
