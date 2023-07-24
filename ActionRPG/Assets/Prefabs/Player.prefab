@@ -202,6 +202,7 @@ MonoBehaviour:
   attackRange: 0.5
   damage: 1
   rig: {fileID: 7657935849123381198}
+  anim: {fileID: 394921623138908286}
 --- !u!114 &7657935849123381196
 MonoBehaviour:
   m_ObjectHideFlags: 0
