@@ -28,7 +28,10 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        curvYRot += turnInput * turnSpeed * Time.deltaTime;
+        float turnRate = Vector3.Dot(rig.velocity.normalized, carModel.forward);
+        turnRate = Mathf.Abs(turnRate);
+
+        curvYRot += turnInput * turnSpeed * turnRate * Time.deltaTime;
 
         //Debug.Log("Accelerating: " + accelerateInput + ", Turn: " + turnInput);
         carModel.position = transform.position + startModelOffset;
