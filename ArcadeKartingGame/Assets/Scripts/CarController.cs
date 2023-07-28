@@ -24,6 +24,7 @@ public class CarController : MonoBehaviour
     void Start()
     {
         startModelOffset = carModel.transform.localPosition;
+        GameManager.Instance.cars.Add(this);
     }
 
     void Update()

@@ -9,6 +9,11 @@ public class CameraController : MonoBehaviour
     public float followSpeed;
     public float rotateSpeed;
 
+    void Start()
+    {
+        transform.parent = null;
+    }
+
     void Update()
     {
         transform.position = Vector3.Lerp(transform.position, target.position, followSpeed * Time.deltaTime);
