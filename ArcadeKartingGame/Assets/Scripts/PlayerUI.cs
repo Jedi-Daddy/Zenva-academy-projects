@@ -34,7 +34,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void GameOver (bool winner)
+    public void GameOver(bool winner)
     {
         gameOverText.gameObject.SetActive(true);
         gameOverText.color = winner == true ? Color.green : Color.red;
