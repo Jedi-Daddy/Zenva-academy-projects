@@ -16,6 +16,8 @@ public class CarController : MonoBehaviour
 
     private float curvYRot;
 
+    public bool canControl;
+
     private bool accelerateInput;
     private float turnInput;
 
@@ -30,10 +32,14 @@ public class CarController : MonoBehaviour
     {
         startModelOffset = carModel.transform.localPosition;
         GameManager.Instance.cars.Add(this);
+        transform.position = GameManager.Instance.spawnPoints[GameManager.Instance.cars.Count - 1].position;
     }
 
     void Update()
     {
+        if (!canControl)
+            return;
+
         float turnRate = Vector3.Dot(rig.velocity.normalized, carModel.forward);
         turnRate = Mathf.Abs(turnRate);
 
@@ -49,7 +55,10 @@ public class CarController : MonoBehaviour
     // 60 times per seconds
     void FixedUpdate()
     {
-        if(accelerateInput == true)
+        if (!canControl)
+            return;
+
+        if (accelerateInput == true)
         {
             rig.AddForce(carModel.forward * acceleration, ForceMode.Acceleration);
         }
