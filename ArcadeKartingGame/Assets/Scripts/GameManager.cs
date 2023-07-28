@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<CarController> cars = new List<CarController> ();
+    public List<CarController> cars = new List<CarController>();
     public Transform[] spawnPoints;
 
     public float positionUpdateRate = 0.05f;
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool gameStarted = false;
 
     public int playersToBegin = 2;
+    public int lapsToWin = 2;
 
     public static GameManager Instance;
 
@@ -23,14 +24,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Time.time - lastPositionUpdateTime > positionUpdateRate)
+        if (Time.time - lastPositionUpdateTime > positionUpdateRate)
         {
             lastPositionUpdateTime = Time.time;
             UpdateCarRacePositions();
         }
 
-        if(!gameStarted && cars.Count == playersToBegin) 
-        { 
+        if (!gameStarted && cars.Count == playersToBegin)
+        {
             gameStarted = true;
             StartCountdown();
         }
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     void BeginGame()
     {
-        for(int x = 0; x <cars.Count; ++x) 
+        for (int x = 0; x < cars.Count; ++x)
         {
             cars[x].canControl = true;
         }
@@ -57,21 +58,35 @@ public class GameManager : MonoBehaviour
     {
         cars.Sort(SortPosition);
 
-        for(int x=0; x<cars.Count; x++)
+        for (int x = 0; x < cars.Count; x++)
         {
             cars[x].racePosition = cars.Count - x;
         }
     }
 
-    int SortPosition (CarController a, CarController b)
+    int SortPosition(CarController a, CarController b)
     {
-        if(a.zonesPassed > b.zonesPassed)
+        if (a.zonesPassed > b.zonesPassed)
             return 1;
-        else if(b.zonesPassed > a.zonesPassed)
+        else if (b.zonesPassed > a.zonesPassed)
             return -1;
         float aDist = Vector3.Distance(a.transform.position, a.curTrackZone.transform.position);
         float bDist = Vector3.Distance(b.transform.position, b.curTrackZone.transform.position);
 
         return aDist > bDist ? 1 : -1;
+    }
+
+    public void CheckIsWinner(CarController car)
+    {
+        if (car.curLap == lapsToWin + 1)
+        {
+            for (int x = 0; x < cars.Count; ++x)
+            {
+                cars[x].canControl = false;
+            }
+            PlayerUI[] uis = FindObjectsOfType<PlayerUI>();
+            for (int x = 0; x < uis.Length; ++x)
+                uis[x].GameOver(uis[x].car == car);
+        }
     }
 }
