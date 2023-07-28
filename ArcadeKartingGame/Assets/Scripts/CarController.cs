@@ -35,7 +35,9 @@ public class CarController : MonoBehaviour
 
         //Debug.Log("Accelerating: " + accelerateInput + ", Turn: " + turnInput);
         carModel.position = transform.position + startModelOffset;
-        carModel.eulerAngles = new Vector3(0,curvYRot,0);
+        //carModel.eulerAngles = new Vector3(0,curvYRot,0);
+
+        CheckGround();
     }
 
     // 60 times per seconds
@@ -45,6 +47,23 @@ public class CarController : MonoBehaviour
         {
             rig.AddForce(carModel.forward * acceleration, ForceMode.Acceleration);
         }
+    }
+
+    void CheckGround()
+    {
+        Ray ray = new Ray(transform.position + new Vector3(0, -0.75f, 0), Vector3.down);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, 1.0f))
+        {
+            carModel.up = hit.normal;
+        }
+        else
+        {
+            carModel.up = Vector3.up;
+        }
+
+        carModel.Rotate(new Vector3(0,curvYRot, 0), Space.Self);
     }
 
     public void OnAccelerateInput(InputAction.CallbackContext context)
