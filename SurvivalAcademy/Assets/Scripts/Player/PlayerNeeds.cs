@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PlayerNeeds : MonoBehaviour
+public class PlayerNeeds : MonoBehaviour, IDamagable
 {
     public Need health;
     public Need hunger;
@@ -50,28 +50,28 @@ public class PlayerNeeds : MonoBehaviour
 
     }
 
-    public void Heal (float amount)
+    // adds to the player's HEALTH
+    public void Heal(float amount)
     {
         health.Add(amount);
     }
-
-    public void Eat (float amount)
+    // adds to the player's HUNGER
+    public void Eat(float amount)
     {
         hunger.Add(amount);
     }
-
-    public void Drink (float amount)
+    // adds to the player's THIRST
+    public void Drink(float amount)
     {
         thirst.Add(amount);
     }
-
-    public void Sleep (float amount)
+    // subtracts from the player's SLEEP
+    public void Sleep(float amount)
     {
-        sleep.Subtract(amount);
-
+        sleep.Substract(amount);
     }
 
-    public void TakePhysicaldamage (int amount)
+    public void TakePhysicalDamage (int amount)
     {
         health.Substract(amount);
         onTakeDamage?.Invoke();
@@ -110,4 +110,8 @@ public class Need
     {
         return curValue / maxValue;
     }
+}
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damageAmount);
 }
