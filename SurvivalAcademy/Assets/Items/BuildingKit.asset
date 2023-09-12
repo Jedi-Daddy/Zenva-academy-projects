@@ -16,6 +16,6 @@ MonoBehaviour:
   description: User to construct shetlter, crafting table
   type: 1
   icon: {fileID: 21300000, guid: 196b2c60ffb84044a9bc670332114a5d, type: 3}
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 919132149155446097, guid: 27c5338926049d0449aa68db6ca75e72, type: 3}
   canStack: 0
   maxStackAmount: 0
