@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
 
     //components
     private PlayerController controller;
+    private PlayerNeeds needs;
 
     [Header("Events")]
     public UnityEvent onOpenInventory;
@@ -42,7 +43,7 @@ public class Inventory : MonoBehaviour
     {
         instance = this;
         controller = GetComponent<PlayerController>();
-
+        needs = GetComponent<PlayerNeeds>();
     }
 
     void Start()
@@ -56,10 +57,36 @@ public class Inventory : MonoBehaviour
             uiSlots[x].index = x;
             uiSlots[x].Clear();
         }
+
+
+        ClearSelectedItemWindow();
     }
+
+    // called when we give an inventory input - managed by the Input System
+    public void OnInventoryButton(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Toggle();
+        }
+    }
+
+    // opens or closes the inventory
     public void Toggle()
     {
-
+        if (inventoryWindow.activeInHierarchy)
+        {
+            inventoryWindow.SetActive(false);
+            onCloseInventory.Invoke();
+            controller.ToggleCursor(false);
+        }
+        else
+        {
+            inventoryWindow.SetActive(true);
+            onOpenInventory.Invoke();
+            ClearSelectedItemWindow();
+            controller.ToggleCursor(true);
+        }
     }
 
     public bool IsOpen()
@@ -135,18 +162,69 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    public void SelectItem (int index)
+    // called when we click on an item slot
+    public void SelectItem(int index)
     {
+        // we can't select the slot if there's no item
+        if (slots[index].item == null)
+            return;
 
+        // set the selected item preview window
+        selectedItem = slots[index];
+        selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.item.displayName;
+        selectedItemDescription.text = selectedItem.item.description;
+
+        //set stat value and stat names
+        selectedItemStatNames.text = string.Empty;
+        selectedItemStatValues.text = string.Empty;
+
+        for (int x = 0; x < selectedItem.item.consumables.Length; x++)
+        {
+            selectedItemStatNames.text += selectedItem.item.consumables[x].type.ToString() + "\n";
+            selectedItemStatValues.text += selectedItem.item.consumables[x].value.ToString() + "\n";
+        }
+
+        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+        equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
+        unEquipButton.SetActive(selectedItem.item.type == ItemType.Equipable && uiSlots[index].equipped);
+        dropButton.SetActive(true);
     }
 
+    // called when the inventory opens or the currently selected item has depleted
     void ClearSelectedItemWindow()
     {
-
+        // clear the text elements
+        selectedItem = null;
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text = string.Empty;
+        selectedItemStatNames.text = string.Empty;
+        selectedItemStatValues.text = string.Empty;
+        // disable buttons
+        useButton.SetActive(false);
+        equipButton.SetActive(false);
+        unEquipButton.SetActive(false);
+        dropButton.SetActive(false);
     }
     public void OnUseButton()
     {
-
+        // is the selected item a consumable?
+        if (selectedItem.item.type == ItemType.Consumable)
+        {
+            // loop through all the needs it will contribute to
+            for (int x = 0; x < selectedItem.item.consumables.Length; x++)
+            {
+                switch (selectedItem.item.consumables[x].type)
+                {
+                    case ConsumableType.Health: needs.Heal(selectedItem.item.consumables[x].value); break;
+                    case ConsumableType.Hunger: needs.Eat(selectedItem.item.consumables[x].value); break;
+                    case ConsumableType.Thirst: needs.Drink(selectedItem.item.consumables[x].value); break;
+                    case ConsumableType.Sleep: needs.Sleep(selectedItem.item.consumables[x].value); break;
+                }
+            }
+        }
+        RemoveSelectedItem();
     }
 
     public void OnEquipButton()
@@ -165,12 +243,22 @@ public class Inventory : MonoBehaviour
 
     public void OnDropButton()
     {
-
+        ThrowItem(selectedItem.item);
+        RemoveSelectedItem();
     }
 
     void RemoveSelectedItem()
     {
-
+        selectedItem.quantity--;
+        // have we dropped all of this stack?
+        if (selectedItem.quantity == 0)
+        {
+            if (uiSlots[selectedItemIndex].equipped == true)
+                UnEquip(selectedItemIndex);
+            selectedItem.item = null;
+            ClearSelectedItemWindow();
+        }
+        UpdateUI();
     }
 
     public void RemoveItem(ItemData item)
