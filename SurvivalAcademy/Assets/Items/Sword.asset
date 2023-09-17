@@ -16,6 +16,7 @@ MonoBehaviour:
   description: You can fight with it.
   type: 1
   icon: {fileID: 21300000, guid: ce8eec6d6df2d4043a6311fc4e4663cc, type: 3}
-  dropPrefab: {fileID: 919132149155446097, guid: d8bc02967ccd93e4cafefe6e23554e3a, type: 3}
+  dropPrefab: {fileID: 8817443130296797989, guid: a294328a6571b904cb48eff92eb8af20, type: 3}
   canStack: 0
   maxStackAmount: 0
+  consumables: []

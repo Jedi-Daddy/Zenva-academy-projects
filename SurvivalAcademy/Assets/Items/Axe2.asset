@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Can be used to gather resources.
   type: 1
   icon: {fileID: 21300000, guid: cc5c1a943f7f96e4590d1b7bd133da6a, type: 3}
-  dropPrefab: {fileID: 100000, guid: 7f82967b447044672a58f49de3c9b447, type: 3}
+  dropPrefab: {fileID: 8774036986467217912, guid: 66a3d24b3929ece4b90d91b55767d81a, type: 3}
   canStack: 0
   maxStackAmount: 0
+  consumables: []
