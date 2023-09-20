@@ -38,11 +38,11 @@ public class EquipTool : Equip
 
     void OnCanAttack()
     {
-        attacking = true;
+        attacking = false;
     }
 
     public void OnHit()
     {
-
+        Debug.Log("Hit Detected");
     }
 }
