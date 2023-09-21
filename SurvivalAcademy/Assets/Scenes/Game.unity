@@ -7463,30 +7463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource_Tree
       objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Size.x
-      value: 1.3590608
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Size.y
-      value: 4.3830547
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Size.z
-      value: 1.3163011
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Center.x
-      value: -0.08735633
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Center.y
-      value: 1.9278008
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267317700492053225, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
-      propertyPath: m_Center.z
-      value: 0.12628508
-      objectReference: {fileID: 0}
     - target: {fileID: 8794889985331362843, guid: 05707c8508f975642ac7bc0396cb8499, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.59
