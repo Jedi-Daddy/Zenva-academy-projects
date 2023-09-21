@@ -8,21 +8,20 @@ public class Resource : MonoBehaviour
     public int quantityPerHit = 1;
     public int capacity;
     public GameObject hitParticle;
-
-    public void Gather (Vector3 hitPoint, Vector3 hitNormal)
+    // called when the player hits the resource with an axe
+    public void Gather(Vector3 hitPoint, Vector3 hitNormal)
     {
+        // give the player "quantityPerHit" of the resource
         for (int i = 0; i < quantityPerHit; i++)
         {
-            capacity -= 1;
-
-            if (capacity < 0)
+            if (capacity <= 0)
                 break;
-
+            capacity -= 1;
             Inventory.instance.AddItem(itemToGive);
         }
-
-        Instantiate(hitParticle,hitPoint, Quaternion.LookRotation(hitNormal, Vector3.up));
-
+        // create hit particle
+        Destroy(Instantiate(hitParticle, hitPoint, Quaternion.LookRotation(hitNormal, Vector3.up)), 1.0f);
+        // if we're empty, destroy the resource
         if (capacity <= 0)
             Destroy(gameObject);
     }

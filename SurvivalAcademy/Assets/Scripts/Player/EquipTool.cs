@@ -9,7 +9,7 @@ public class EquipTool : Equip
     public float attackDistance;
 
     [Header("Resource Gathering")]
-    public bool doesGatheringResources;
+    public bool doesGatherResources;
 
     [Header("Combat")]
     public bool doesDealDamage;
@@ -41,8 +41,24 @@ public class EquipTool : Equip
         attacking = false;
     }
 
+    // called when the animation impacts
     public void OnHit()
     {
-        Debug.Log("Hit Detected");
+        //Debug.Log("Hit");
+        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, attackDistance))
+        {
+            // did we hit a resource?
+            if (doesGatherResources && hit.collider.GetComponent<Resource>())
+            {
+                hit.collider.GetComponent<Resource>().Gather(hit.point, hit.normal);
+            }
+            // did we hit a damagable?
+            if (doesDealDamage && hit.collider.GetComponent<IDamagable>() != null)
+            {
+                hit.collider.GetComponent<IDamagable>().TakePhysicalDamage(damage);
+            }
+        }
     }
 }
