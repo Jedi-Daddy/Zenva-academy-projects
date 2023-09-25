@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272c8a03738ddd4384257dde6d6b548, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemToCraft: {fileID: 0}
+  itemToCraft: {fileID: 11400000, guid: 7b9fa2820d50ecf408d8e8d055878356, type: 2}
+  cost:
+  - item: {fileID: 11400000, guid: 03247c09fc15a5b4b99700259cdbabff, type: 2}
+    quantity: 1
+  - item: {fileID: 11400000, guid: a4e5fd552ba3f9d47a91b5313bd78094, type: 2}
+    quantity: 3
