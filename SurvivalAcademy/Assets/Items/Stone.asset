@@ -16,6 +16,7 @@ MonoBehaviour:
   description: A common resorces.
   type: 0
   icon: {fileID: 21300000, guid: 57b43a82420044d41a59a367db6309e7, type: 3}
-  dropPrefab: {fileID: 919132149155446097, guid: 79d85da2cefa3f24bacee25280d64a14, type: 3}
+  dropPrefab: {fileID: 2720890520197070190, guid: 3434dd355aa4c5443acab529cc3732d6, type: 3}
   canStack: 1
   maxStackAmount: 12
+  consumables: []
