@@ -26,6 +26,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         //base.OnConnectedToMaster();
-        Debug.Log("We've connected to the master server.");
+        //Debug.Log("We've connected to the master server.");
+        //CreateRoom("testRoom");
+        PhotonNetwork.JoinLobby();
+    }
+
+ /* public override void OnJoinedRoom()
+    {
+        //base.OnJoinedRoom();
+        Debug.Log("joined room: " + PhotonNetwork.CurrentRoom.Name);
+    }
+ */
+    // creates a new room of the requested room name
+    public void CreateRoom (string roomName)
+    {
+        RoomOptions options = new RoomOptions();
+        options.MaxPlayers = (byte)maxPlayers;
+
+        PhotonNetwork.CreateRoom(roomName, options);
+    } 
+
+    // joins a room of the requested room name
+    public void JoinRoom (string roomName)
+    {
+        PhotonNetwork.JoinRoom(roomName);
+    }
+
+    public void ChangeScene (string sceneName)
+    {
+        PhotonNetwork.LoadLevel(sceneName);
     }
 }
