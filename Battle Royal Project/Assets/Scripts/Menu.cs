@@ -100,4 +100,47 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         NetworkManager.instance.CreateRoom(roomNameInput.text);
     }
 
+    // LOBBY SCREEN
+
+    public override void OnJoinedRoom()
+    {
+        SetScreen(lobbyScreen);
+        photonView.RPC("UpdateLobbyUI", RpcTarget.All);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdateLobbyUI();
+    }
+
+    [PunRPC]
+    void UpdateLobbyUI()
+    {
+        // enable or disable the start game button depending on if we're the host
+        startGameButton.interactable = PhotonNetwork.IsMasterClient;
+        
+        // display all the players
+        playerListText.text = "";
+        foreach (Player player in PhotonNetwork.PlayerList)
+            playerListText.text += player.NickName + "\n";
+        
+        // set the room info text
+        roomInfoText.text = "<b>Room Name</b>\n" + PhotonNetwork.CurrentRoom.Name;
+    }
+
+    public void OnStartGameButton()
+    {
+        // hide the room
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        
+        // tell everyone to load the game scene
+        NetworkManager.instance.photonView.RPC("ChangeScene", RpcTarget.All, "Game");
+    }
+
+    public void OnLeaveLobbyButton()
+    {
+        PhotonNetwork.LeaveRoom();
+        SetScreen(mainScreen);
+    }
 }
