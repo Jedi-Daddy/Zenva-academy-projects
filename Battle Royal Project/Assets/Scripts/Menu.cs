@@ -59,6 +59,9 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         
         // activate the requested screen
         screen.SetActive(true);
+
+        if (screen == lobbyBrowserScreen)
+            UpdateLobbyBrowserUI();
     }
 
     // called when the "Back" button gets pressed
@@ -146,6 +149,14 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
     // LOBBY BROWSER SCREEN
 
+    GameObject CreateRoomButton()
+    {
+        GameObject buttonObj = Instantiate(roomButtonPrefab, roomListContainer.transform);
+        roomButtons.Add(buttonObj);
+        
+        return buttonObj;
+    }
+
     void UpdateLobbyBrowserUI()
     {
         // disable all room buttons
@@ -157,6 +168,7 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
         {
             // get or create the button object
             GameObject button = x >= roomButtons.Count ? CreateRoomButton() : roomButtons[x];
+            
             button.SetActive(true);
             
             // set the room name and player count texts
@@ -165,9 +177,26 @@ public class Menu : MonoBehaviourPunCallbacks, ILobbyCallbacks
 
             // set the button OnClick event
             Button buttonComp = button.GetComponent<Button>();
+            
             string roomName = roomList[x].Name;
+            
             buttonComp.onClick.RemoveAllListeners();
             buttonComp.onClick.AddListener(() => { OnJoinRoomButton(roomName); });
         }
+    }
+
+    public void OnJoinRoomButton(string roomName)
+    {
+        NetworkManager.instance.JoinRoom(roomName);
+    }
+
+    public void OnRefreshButton()
+    {
+        UpdateLobbyBrowserUI();
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> allRooms)
+    {
+        roomList = allRooms;
     }
 }
