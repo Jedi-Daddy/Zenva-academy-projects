@@ -48,5 +48,11 @@ public class PlayerWeapon : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity);
         bulletObj.transform.forward = dir;
 
+        // get bullet script
+        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+        
+        // initialize it and set the velocity
+        bulletScript.Initialize(damage, player.id, player.photonView.IsMine);
+        bulletScript.rig.velocity = dir * bulletSpeed;
     }
 }

@@ -490,7 +490,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3058556614015757188}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3058556614015757188
@@ -526,7 +526,7 @@ MonoBehaviour:
   maxAmmo: 50
   bulletSpeed: 20
   shootRate: 0.2
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 9208170751092103993, guid: ad2e89cd83639904c9aa7cc7ebbed4a2, type: 3}
   bulletSpawnPos: {fileID: 617706302608314135}
 --- !u!1 &7622081559867804632
 GameObject:
