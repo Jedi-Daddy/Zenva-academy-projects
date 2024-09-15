@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviourPun
     public Rigidbody rig;
     public Player photonPlayer;
     public MeshRenderer mr;
+    public PlayerWeapon weapon;
 
 
     [PunRPC]
@@ -51,6 +52,9 @@ public class PlayerController : MonoBehaviourPun
         Move();
         if (Input.GetKeyDown(KeyCode.Space))
             TryJump();
+
+        if (Input.GetMouseButtonDown(0))
+            weapon.TryShoot();
     }
 
     void Move()
