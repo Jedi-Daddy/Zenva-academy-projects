@@ -14,6 +14,7 @@ public class CameraControleer : MonoBehaviour
     
     [Header("Spectator")]
     public float spectatorMoveSpeed;
+    
     private float rotX;
     private float rotY;
     
@@ -44,6 +45,7 @@ public class CameraControleer : MonoBehaviour
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             float y = 0;
+            
             if (Input.GetKey(KeyCode.E))
                 y = 1;
             else if (Input.GetKey(KeyCode.Q))
@@ -56,8 +58,15 @@ public class CameraControleer : MonoBehaviour
         {
             // rotate the camera vertically
             transform.localRotation = Quaternion.Euler(-rotY, 0, 0);
+            
             // rotate the player horizontally
             transform.parent.rotation = Quaternion.Euler(transform.rotation.x, rotX, 0);
         }
+    }
+
+    public void SetAsSpectator()
+    {
+        isSpectator = true;
+        transform.parent = null;
     }
 }

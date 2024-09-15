@@ -17,15 +17,14 @@ public class PlayerController : MonoBehaviourPun
     public int maxHp;
     public int kills;
     public bool dead;
-    
+
     private bool flashingDamage;
 
     [Header("Components")]
     public Rigidbody rig;
     public Player photonPlayer;
-    public MeshRenderer mr;
     public PlayerWeapon weapon;
-
+    public MeshRenderer mr;
 
     [PunRPC]
     public void Initialize(Player player)
@@ -41,6 +40,10 @@ public class PlayerController : MonoBehaviourPun
             GetComponentInChildren<Camera>().gameObject.SetActive(false);
             rig.isKinematic = true;
         }
+        else
+        {
+            //GameUI.instance.Initialize(this);
+        }
     }
 
     void Update()
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviourPun
             return;
 
         Move();
+
         if (Input.GetKeyDown(KeyCode.Space))
             TryJump();
 
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviourPun
         // calculate a direction relative to where we're facing
         Vector3 dir = (transform.forward * z + transform.right * x) * moveSpeed;
         dir.y = rig.velocity.y;
-        
+
         // set that as our velocity
         rig.velocity = dir;
     }
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviourPun
     {
         // create a ray facing down
         Ray ray = new Ray(transform.position, Vector3.down);
-        
+
         // shoot the raycast
         if (Physics.Raycast(ray, 1.5f))
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -86,16 +90,17 @@ public class PlayerController : MonoBehaviourPun
     {
         if (dead)
             return;
-        
+
         curHp -= damage;
         curAttackerId = attackerId;
-        
+
         // flash the player red
         photonView.RPC("DamageFlash", RpcTarget.Others);
-        
+
         // update the health bar UI
-        
-        // die if no health left
+        //GameUI.instance.UpdateHealthBar();
+
+        //die if no health left
         if (curHp <= 0)
             photonView.RPC("Die", RpcTarget.All);
     }
@@ -107,16 +112,16 @@ public class PlayerController : MonoBehaviourPun
             return;
 
         StartCoroutine(DamageFlashCoRoutine());
-        
+
         IEnumerator DamageFlashCoRoutine()
         {
             flashingDamage = true;
 
             Color defaultColor = mr.material.color;
             mr.material.color = Color.red;
-            
+
             yield return new WaitForSeconds(0.05f);
-            
+
             mr.material.color = defaultColor;
             flashingDamage = false;
         }
@@ -125,6 +130,45 @@ public class PlayerController : MonoBehaviourPun
     [PunRPC]
     void Die()
     {
+        curHp = 0;
+        dead = true;
 
+        GameManager.instance.alivePlayers--;
+
+        // host will check the win condition
+        if (PhotonNetwork.IsMasterClient)
+            GameManager.instance.CheckWinCondition();
+
+        // is this our local player?
+        if (photonView.IsMine)
+        {
+            if (curAttackerId != 0)
+                GameManager.instance.GetPlayer(curAttackerId).photonView.RPC("AddKill", RpcTarget.All);
+
+            // set the cam to spectator
+            //GetComponentInChildren<CameraController>().SetAsSpectator();
+
+            // disable the physics and hide the player
+            rig.isKinematic = true;
+            transform.position = new Vector3(0, -50, 0);
+        }
+    }
+
+    [PunRPC]
+    public void AddKill()
+    {
+        kills++;
+
+        // update the UI
+        //GameUI.instance.UpdatePlayerInfoText();
+    }
+
+    [PunRPC]
+    public void Heal(int amountToHeal)
+    {
+        curHp = Mathf.Clamp(curHp + amountToHeal, 0, maxHp);
+
+        // update the health bar UI
+        //GameUI.instance.UpdateHealthBar();
     }
 }
