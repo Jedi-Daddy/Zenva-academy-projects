@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviourPun
     public PlayerController[] players;
     public Transform[] spawnPoints;
     public int alivePlayers;
+
     private int playersInGame;
     
     // instance
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviourPun
     {
         players = new PlayerController[PhotonNetwork.PlayerList.Length];
         alivePlayers = players.Length;
+
         photonView.RPC("ImInGame", RpcTarget.AllBuffered);
     }
 
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviourPun
     void ImInGame()
     {
         playersInGame++;
+
         if (PhotonNetwork.IsMasterClient && playersInGame == PhotonNetwork.PlayerList.Length)
             photonView.RPC("SpawnPlayer", RpcTarget.All);
     }
@@ -50,24 +53,37 @@ public class GameManager : MonoBehaviourPun
 
     public PlayerController GetPlayer(int playerId)
     {
-        return players.First(x => x.id == playerId);
+        foreach (PlayerController player in players)
+        {
+            if (player != null && player.id == playerId)
+                return player;
+        }
+
+        return null;
     }
-    
-    public PlayerController GetPlayer(GameObject playerObj)
+
+    public PlayerController GetPlayer(GameObject playerObject)
     {
-        return players.First(x => x.gameObject == playerObj);
+        foreach (PlayerController player in players)
+        {
+            if (player != null && player.gameObject == playerObject)
+                return player;
+        }
+
+        return null;
     }
 
     public void CheckWinCondition()
     {
-        //if (alivePlayers == 1)
-          //  photonView.RPC("WinGame", RpcTargets.All, players.First(x => !x.dead).id);
+        if (alivePlayers == 1)
+            photonView.RPC("WinGame", RpcTarget.All, players.First(x => !x.dead).id);
     }
 
     [PunRPC]
     void WinGame(int winningPlayer)
     {
         // set the UI win text
+        GameUI.instance.SetWinText(GetPlayer(winningPlayer).photonPlayer.NickName);
 
         Invoke("GoBackToMenu", postGameTime);
     }

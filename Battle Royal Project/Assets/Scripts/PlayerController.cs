@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviourPun
         }
         else
         {
-            //GameUI.instance.Initialize(this);
+            GameUI.instance.Initialize(this);
         }
     }
 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviourPun
         photonView.RPC("DamageFlash", RpcTarget.Others);
 
         // update the health bar UI
-        //GameUI.instance.UpdateHealthBar();
+        GameUI.instance.UpdateHealthBar();
 
         //die if no health left
         if (curHp <= 0)
@@ -160,15 +160,14 @@ public class PlayerController : MonoBehaviourPun
         kills++;
 
         // update the UI
-        //GameUI.instance.UpdatePlayerInfoText();
+        GameUI.instance.UpdatePlayerInfoText();
     }
 
     [PunRPC]
     public void Heal(int amountToHeal)
     {
         curHp = Mathf.Clamp(curHp + amountToHeal, 0, maxHp);
-
         // update the health bar UI
-        //GameUI.instance.UpdateHealthBar();
+        GameUI.instance.UpdateHealthBar();
     }
 }

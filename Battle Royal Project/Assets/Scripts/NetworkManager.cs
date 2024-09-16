@@ -6,10 +6,11 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    public int maxPlayers = 10;
+    public int MaxPlayers = 10;
+
     // instance
     public static NetworkManager instance;
-    
+
     void Awake()
     {
         instance = this;
@@ -24,33 +25,45 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        //Debug.Log("We've connected to the master server!");
-        //CreateRoom("testroom");
         PhotonNetwork.JoinLobby();
     }
 
-    /* public override void OnJoinedRoom()
-    {
-        Debug.Log("joined room: " + PhotonNetwork.CurrentRoom.Name);
-    }
-    */
-    // attempts to create a room
+    // creates a new room of the requested room name
     public void CreateRoom(string roomName)
     {
         RoomOptions options = new RoomOptions();
-        options.MaxPlayers = (byte)maxPlayers;
+        options.MaxPlayers = (byte)MaxPlayers;
+
         PhotonNetwork.CreateRoom(roomName, options);
     }
 
-    // attempts to join a room
+    // joins a room of the requested room name
     public void JoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    // changes the scene through Photon's system
     [PunRPC]
     public void ChangeScene(string sceneName)
     {
         PhotonNetwork.LoadLevel(sceneName);
+    }
+
+    // called when we disconnect from the Photon server
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        PhotonNetwork.LoadLevel("Menu");
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        GameManager.instance.alivePlayers--;
+        GameUI.instance.UpdatePlayerInfoText();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameManager.instance.CheckWinCondition();
+        }
     }
 }
