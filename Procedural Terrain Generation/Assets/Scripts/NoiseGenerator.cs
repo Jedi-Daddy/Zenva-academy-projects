@@ -12,7 +12,10 @@ public class NoiseGenerator
         {
             for (int y = 0; y < noiseSampleSize; y++)
             {
+                float samplePosX = (float)x / scale;
+                float samplePosY = (float)y / scale;
 
+                noiseMap[x, y] = Mathf.PerlinNoise(samplePosX, samplePosY);
             }
         }
 
