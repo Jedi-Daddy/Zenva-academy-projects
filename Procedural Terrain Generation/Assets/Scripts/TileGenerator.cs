@@ -111,7 +111,7 @@ public class TileGenerator : MonoBehaviour
         }
 
         CreateDataMap(heatTerrainTypeMap, moistureTerrainTypeMap);
-        //TreeSpawner.instance.Spawn(dataMap);
+        TreeSpawner.instance.Spawn(dataMap);
     }
 
     void CreateDataMap(TerrainType[,] heatTerrainTypeMap, TerrainType[,] moistureTerrainTypeMap)
@@ -127,7 +127,7 @@ public class TileGenerator : MonoBehaviour
                 data.position = transform.position + verts[(x * noiseSampleSize) + z];
                 data.heatTerrainType = heatTerrainTypeMap[x, z];
                 data.moistureTerrainType = moistureTerrainTypeMap[x, z];
-                //data.biome = BiomeBuilder.instance.GetBiome(data.heatTerrainType, data.moistureTerrainType);
+                data.biome = BiomeBuilder.instance.GetBiome(data.heatTerrainType, data.moistureTerrainType);
 
                 dataMap[x, z] = data;
             }

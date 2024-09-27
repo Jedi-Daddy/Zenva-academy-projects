@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 345701844}
   - component: {fileID: 345701843}
   - component: {fileID: 345701845}
+  - component: {fileID: 345701846}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -153,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 2744246979392409007, guid: 253aec627405d8345890684016755e60, type: 3}
-  numX: 10
-  numZ: 10
+  numX: 3
+  numZ: 3
 --- !u!4 &345701844
 Transform:
   m_ObjectHideFlags: 0
@@ -182,43 +183,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b8f5c92b4832841a896c8623e62677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomesRows:
-  - biomes:
-    - name: desert
-      color: {r: 0.9547169, g: 0.6070663, b: 0.0054039797, a: 1}
-    - name: desert
-      color: {r: 0.95294124, g: 0.60784316, b: 0.003921569, a: 1}
-    - name: tundra
-      color: {r: 0, g: 0.9470029, b: 1, a: 1}
-    - name: tundra
-      color: {r: 0, g: 0.9450981, b: 1, a: 1}
-  - biomes:
-    - name: savanna
-      color: {r: 0.8860046, g: 0.97735846, b: 0.43335703, a: 1}
-    - name: savanna
-      color: {r: 0.8862746, g: 0.97647065, b: 0.43529415, a: 0}
-    - name: forest
-      color: {r: 0.2560243, g: 0.8792453, b: 0, a: 1}
-    - name: tundra
-      color: {r: 0, g: 0.9450981, b: 1, a: 0}
-  - biomes:
-    - name: rainforest
-      color: {r: 0.0049341195, g: 0.3735848, b: 0.047940426, a: 1}
-    - name: rainforest
-      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
-    - name: forest
-      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
-    - name: forest
-      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
-  - biomes:
-    - name: rainforest
-      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
-    - name: rainforest
-      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
-    - name: forest
-      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
-    - name: forest
-      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
+  biomes:
+  - type: 0
+    color: {r: 0.94716984, g: 0.7428813, b: 0, a: 1}
+    spawnPrefabs: 1
+    spawnablePrefabs:
+    - {fileID: 9111914166981599659, guid: 9a4f6a467b34c974f804d0353c3c9023, type: 3}
+    - {fileID: 1820537380122807741, guid: f7a4e84e7de4ae748af07cfc72a848a3, type: 3}
+    density: 0.2
+  - type: 1
+    color: {r: 0, g: 0.932997, b: 1, a: 1}
+    spawnPrefabs: 0
+    spawnablePrefabs: []
+    density: 0
+  - type: 2
+    color: {r: 0.9721588, g: 1, b: 0.19433957, a: 1}
+    spawnPrefabs: 1
+    spawnablePrefabs:
+    - {fileID: 5632328854572975317, guid: f07926f1c2b32c845a8ddefc1812c360, type: 3}
+    - {fileID: 6505304346977462305, guid: 9e9b7eb9ac46bbd4bb7d7fc86e8d3bb1, type: 3}
+    density: 0.2
+  - type: 3
+    color: {r: 0.44432434, g: 1, b: 0.28490567, a: 1}
+    spawnPrefabs: 1
+    spawnablePrefabs:
+    - {fileID: 2385031128852394821, guid: 75bfd68e357aee742aa9a8923a5965e4, type: 3}
+    - {fileID: 5934457393639831477, guid: 9c8df7e9c4d8d594089152d43ac5c672, type: 3}
+    density: 1
+  - type: 4
+    color: {r: 0, g: 0.3433962, b: 0.028058281, a: 0}
+    spawnPrefabs: 1
+    spawnablePrefabs:
+    - {fileID: 5632328854572975317, guid: f07926f1c2b32c845a8ddefc1812c360, type: 3}
+    - {fileID: 2385031128852394821, guid: 75bfd68e357aee742aa9a8923a5965e4, type: 3}
+    - {fileID: 5934457393639831477, guid: 9c8df7e9c4d8d594089152d43ac5c672, type: 3}
+    density: 2
+  tableRows:
+  - tableColumns: 00000000000000000100000001000000
+  - tableColumns: 02000000020000000300000001000000
+  - tableColumns: 04000000040000000300000003000000
+  - tableColumns: 04000000040000000300000003000000
+--- !u!114 &345701846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345701842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71dd45c6f1b943f4185f041bb167e359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTreeOffset: 0.3
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
