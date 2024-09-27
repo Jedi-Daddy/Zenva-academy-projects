@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 345701844}
   - component: {fileID: 345701843}
+  - component: {fileID: 345701845}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -169,6 +170,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345701845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345701842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b8f5c92b4832841a896c8623e62677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomesRows:
+  - biomes:
+    - name: desert
+      color: {r: 0.9547169, g: 0.6070663, b: 0.0054039797, a: 1}
+    - name: desert
+      color: {r: 0.95294124, g: 0.60784316, b: 0.003921569, a: 1}
+    - name: tundra
+      color: {r: 0, g: 0.9470029, b: 1, a: 1}
+    - name: tundra
+      color: {r: 0, g: 0.9450981, b: 1, a: 1}
+  - biomes:
+    - name: savanna
+      color: {r: 0.8860046, g: 0.97735846, b: 0.43335703, a: 1}
+    - name: savanna
+      color: {r: 0.8862746, g: 0.97647065, b: 0.43529415, a: 0}
+    - name: forest
+      color: {r: 0.2560243, g: 0.8792453, b: 0, a: 1}
+    - name: tundra
+      color: {r: 0, g: 0.9450981, b: 1, a: 0}
+  - biomes:
+    - name: rainforest
+      color: {r: 0.0049341195, g: 0.3735848, b: 0.047940426, a: 1}
+    - name: rainforest
+      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
+    - name: forest
+      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
+    - name: forest
+      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
+  - biomes:
+    - name: rainforest
+      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
+    - name: rainforest
+      color: {r: 0.003921569, g: 0.37254903, b: 0.04705883, a: 1}
+    - name: forest
+      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
+    - name: forest
+      color: {r: 0.25490198, g: 0.87843144, b: 0, a: 1}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
