@@ -19,6 +19,9 @@ public class TileGenerator : MonoBehaviour
     [Header("Curves")]
     public AnimationCurve heightCurve;
 
+    [HideInInspector]
+    public Vector2 offset;
+
     private MeshRenderer tileMeshRenderer;
     private MeshFilter tileMeshFilter;
     private MeshCollider tileMeshCollider;
@@ -35,9 +38,9 @@ public class TileGenerator : MonoBehaviour
 
     void GenerateTile()
     {
-        float[,] heightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize, scale, waves);
+        float[,] heightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize, scale, waves, offset);
 
-        float[,] hdHeightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize -1, scale,waves, textureResolution);
+        float[,] hdHeightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize -1, scale, waves, offset, textureResolution);
 
         Vector3[] verts = tileMeshFilter.mesh.vertices;
         
