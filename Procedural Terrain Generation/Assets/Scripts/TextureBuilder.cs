@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextureBuilder
 {
-    public static Texture2D BuildTexture(float[,] noiseMap)
+    public static Texture2D BuildTexture(float[,] noiseMap, TerrainType[] terrainTypes)
     {
         Color[] pixels = new Color[noiseMap.Length];
 
@@ -16,7 +16,14 @@ public class TextureBuilder
             {
                 int index = (x * pixelLength) + z;
 
-                pixels[index] = Color.Lerp(Color.black, Color.white, noiseMap[x, z]);
+                foreach (TerrainType terrainType in terrainTypes)
+                {
+                    if (noiseMap[x, z] < terrainType.threshold)
+                    {
+                        pixels[index] = terrainType.color;
+                        break;
+                    }
+                }
             }
         }
 
