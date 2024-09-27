@@ -13,6 +13,12 @@ public class TileGenerator : MonoBehaviour
     [Header("Terrain Types")]
     public TerrainType[] heightTerrainTypes;
 
+    [Header("Waves")]
+    public Wave[] waves;
+
+    [Header("Curves")]
+    public AnimationCurve heightCurve;
+
     private MeshRenderer tileMeshRenderer;
     private MeshFilter tileMeshFilter;
     private MeshCollider tileMeshCollider;
@@ -29,9 +35,9 @@ public class TileGenerator : MonoBehaviour
 
     void GenerateTile()
     {
-        float[,] heightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize, scale);
+        float[,] heightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize, scale, waves);
 
-        float[,] hdHeightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize, scale, textureResolution);
+        float[,] hdHeightMap = NoiseGenerator.GenerateNoiseMap(noiseSampleSize -1, scale,waves, textureResolution);
 
         Vector3[] verts = tileMeshFilter.mesh.vertices;
         
@@ -41,7 +47,7 @@ public class TileGenerator : MonoBehaviour
             {
                 int index = (x * noiseSampleSize) + z;
 
-                verts[index].y = heightMap[x, z] * maxHeight;
+                verts[index].y = heightCurve.Evaluate(heightMap[x, z]) * maxHeight;
             }
         }
 
@@ -62,5 +68,5 @@ public class TerrainType
 {
     [Range(0.0f, 1.0f)]
     public float threshold;
-    public Color color;
+    public Gradient colorGradient;
 }
