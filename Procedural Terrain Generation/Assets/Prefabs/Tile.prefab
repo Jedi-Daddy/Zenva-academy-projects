@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noiseSampleSize: 30
-  scale: 10
+  scale: 15
   maxHeight: 4
   textureResolution: 32
   visualizationType: 3
